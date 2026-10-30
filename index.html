@@ -33,18 +33,15 @@ html[lang="ja"] [data-lang="en"],html[lang="en"] [data-lang="ja"]{display:none}
 .lang button{font:500 .8125rem/1 var(--sans);color:var(--muted);background:none;
   border:1px solid transparent;border-radius:999px;padding:9px 13px;cursor:pointer}
 .lang button[aria-pressed="true"]{color:var(--ink);border-color:var(--line)}
-.name-kana{margin:.35rem 0 0;font:500 .9375rem/1.4 var(--sans);color:var(--muted);letter-spacing:.12em}
+.name-kana{margin:.5rem 0 0;font:500 .9375rem/1.4 var(--sans);color:var(--muted);letter-spacing:.12em}
 /* Kartvizit boyutunda (91:55) ana kart */
 .meishi{aspect-ratio:91/55;display:grid;grid-template-columns:1fr auto;gap:16px;
   background:var(--card);border:1px solid var(--line);border-radius:6px;
   padding:clamp(18px,6vw,32px);box-shadow:5px 5px 0 var(--line)}
 .who{display:flex;flex-direction:column;justify-content:space-between;min-width:0}
 h1{font:700 clamp(1.7rem,8vw,2.4rem)/1.15 var(--serif);letter-spacing:.01em;margin:0;overflow-wrap:anywhere}
-.role{margin:.5rem 0 0;font-weight:500}
-.tagline{margin:16px 0 0;color:var(--muted);font-size:.875rem;line-height:1.6;max-width:30ch}
-.kana{writing-mode:vertical-rl;margin:0;padding-left:16px;border-left:1px solid var(--line);
-  color:var(--muted);font:500 .8125rem/1 var(--sans);letter-spacing:.35em;align-self:stretch}
-
+.role{margin:.6rem 0 0;font-weight:500}
+.tagline{margin:16px 0 0;color:var(--muted);font-size:.999rem;line-height:1.6;max-width:300ch}
 .save{display:block;width:100%;margin:32px 0 12px;padding:16px;border:0;border-radius:6px;
   background:var(--accent);color:var(--accent-ink);font:700 1rem/1.2 var(--sans);cursor:pointer}
 .save:hover{filter:brightness(1.12)}
@@ -82,7 +79,7 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
     <div class="who">
       <div>
         <h1 id="name">Cagri Karpuz</h1>
-        <p class="name-kana" data-lang="ja" lang="ja">カルプズ　チャール</p>
+        <p class="name-kana" data-lang="ja" lang="ja">カルプズチャール</p>
         <p class="role" id="role">
           <span data-lang="en" lang="en">Backend Developer</span>
           <span data-lang="ja" lang="ja">バックエンドエンジニア</span>
@@ -93,7 +90,6 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
         <span data-lang="ja" lang="ja">メカトロニクス工学出身のバックエンドエンジニア。PHPとAWSを使っています。</span>
       </p>
     </div>
-    <p class="kana" lang="ja">ナマエ</p>
   </header>
 
   <button class="save" id="save" type="button">
@@ -118,24 +114,33 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
        2. Listenin başına (en yeni en üstte olsun) ya da sonuna yapıştır.
        3. Üç şeyi değiştir: href (GitHub repo linki), başlık, açıklama. İstersen etiketleri de (<li>Tech A</li>).
        Dosyayı kaydedip GitHub'a yüklediğinde site 1-2 dakika içinde güncellenir. -->
-  <h2>
+   <h2>
     <span data-lang="en" lang="en">Projects</span>
     <span data-lang="ja" lang="ja">プロジェクト</span>
   </h2>
   <ul class="projects">
     <li>
       <h3><a href="https://github.com/Kharpoose/AWS-Simple-Data-Pipeline" target="_blank" rel="noopener">AWS Serverless Data Pipeline</a></h3>
-      <p>A serverless pipeline on AWS for IoT sensor data. Lambda validates and transforms incoming files from S3, stores the results in DynamoDB, and Athena makes them queryable with SQL.</p>
+      <p>
+        <span data-lang="en" lang="en">A serverless pipeline on AWS for IoT sensor data. Lambda validates and transforms incoming files from S3, stores the results in DynamoDB, and Athena makes them queryable with SQL.</span>
+        <span data-lang="ja" lang="ja">IoTセンサーデータ向けのAWSサーバーレスパイプラインです。S3に届いたファイルをLambdaで検証・変換し、結果をDynamoDBに保存、AthenaでSQLによるクエリを可能にしています。</span>
+      </p>
       <ul class="tags"><li>S3</li><li>Athena</li><li>Lambda</li><li>DynamoDB</li></ul>
     </li>
     <li>
       <h3><a href="https://github.com/Kharpoose/aws-serverless-url-shortener" target="_blank" rel="noopener">AWS Serverless URL Shortener</a></h3>
-      <p>A serverless URL shortener with a REST API. API Gateway exposes the endpoints, Lambda generates the short codes, and DynamoDB stores the mappings.</p>
+      <p>
+        <span data-lang="en" lang="en">A serverless URL shortener with a REST API. API Gateway exposes the endpoints, Lambda generates the short codes, and DynamoDB stores the mappings.</span>
+        <span data-lang="ja" lang="ja">REST APIを備えたサーバーレスのURL短縮サービスです。API Gatewayでエンドポイントを公開し、Lambdaで短縮コードを生成、DynamoDBでURLの対応関係を保存しています。</span>
+      </p>
       <ul class="tags"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li></ul>
     </li>
     <li>
       <h3><a href="https://github.com/Kharpoose/Japanese-Learning-App" target="_blank" rel="noopener">Japanese Learning App</a></h3>
-      <p>A Japanese learning app built with Flutter, started during university as a personal project. There’s a section that evaluates the user's pronunciation and gives them a score.</p>
+      <p>
+        <span data-lang="en" lang="en">A Japanese learning app built with Flutter, started during university as a personal project. There’s a section that evaluates the user’s pronunciation and gives them a score.</span>
+        <span data-lang="ja" lang="ja">Flutterで開発した日本語学習アプリで、大学在学中に個人プロジェクトとして始めました。ユーザーの発音を評価し、スコアを表示する機能があります。</span>
+      </p>
       <ul class="tags"><li>Flutter</li><li>Dart</li><li>Mobile</li></ul>
     </li>
   </ul>
