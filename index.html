@@ -33,7 +33,7 @@ html[lang="ja"] [data-lang="en"],html[lang="en"] [data-lang="ja"]{display:none}
 .lang button{font:500 .8125rem/1 var(--sans);color:var(--muted);background:none;
   border:1px solid transparent;border-radius:999px;padding:9px 13px;cursor:pointer}
 .lang button[aria-pressed="true"]{color:var(--ink);border-color:var(--line)}
-
+.name-kana{margin:.35rem 0 0;font:500 .9375rem/1.4 var(--sans);color:var(--muted);letter-spacing:.12em}
 /* Kartvizit boyutunda (91:55) ana kart */
 .meishi{aspect-ratio:91/55;display:grid;grid-template-columns:1fr auto;gap:16px;
   background:var(--card);border:1px solid var(--line);border-radius:6px;
@@ -82,6 +82,7 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
     <div class="who">
       <div>
         <h1 id="name">Cagri Karpuz</h1>
+        <p class="name-kana" data-lang="ja" lang="ja">カルプズ　チャール</p>
         <p class="role" id="role">
           <span data-lang="en" lang="en">Backend Developer</span>
           <span data-lang="ja" lang="ja">バックエンドエンジニア</span>
