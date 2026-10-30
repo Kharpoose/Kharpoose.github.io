@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Name – Backend Developer</title>
+<meta name="description" content="Backend developer in Japan. Links and projects.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2f4f7; --card:#fbfcfd; --ink:#14202e; --muted:#566476;
+  --line:#d3dae2; --accent:#264a73; --accent-ink:#ffffff;
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#0e151e; --card:#151f2b; --ink:#e7ecf2; --muted:#9aa7b7;
+    --line:#2a3646; --accent:#8db3de; --accent-ink:#0e151e}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.7 var(--sans);
+  padding:max(20px,env(safe-area-inset-top)) 20px max(40px,env(safe-area-inset-bottom))}
+.wrap{max-width:560px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html[lang="ja"] [data-lang="en"],html[lang="en"] [data-lang="ja"]{display:none}
+
+.lang{display:flex;justify-content:flex-end;gap:4px;margin-bottom:16px}
+.lang button{font:500 .8125rem/1 var(--sans);color:var(--muted);background:none;
+  border:1px solid transparent;border-radius:999px;padding:9px 13px;cursor:pointer}
+.lang button[aria-pressed="true"]{color:var(--ink);border-color:var(--line)}
+
+/* Kartvizit boyutunda (91:55) ana kart */
+.meishi{aspect-ratio:91/55;display:grid;grid-template-columns:1fr auto;gap:16px;
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:clamp(18px,6vw,32px);box-shadow:5px 5px 0 var(--line)}
+.who{display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+h1{font:700 clamp(1.7rem,8vw,2.4rem)/1.15 var(--serif);letter-spacing:.01em;margin:0;overflow-wrap:anywhere}
+.role{margin:.5rem 0 0;font-weight:500}
+.tagline{margin:16px 0 0;color:var(--muted);font-size:.875rem;line-height:1.6;max-width:30ch}
+.kana{writing-mode:vertical-rl;margin:0;padding-left:16px;border-left:1px solid var(--line);
+  color:var(--muted);font:500 .8125rem/1 var(--sans);letter-spacing:.35em;align-self:stretch}
+
+.save{display:block;width:100%;margin:32px 0 12px;padding:16px;border:0;border-radius:6px;
+  background:var(--accent);color:var(--accent-ink);font:700 1rem/1.2 var(--sans);cursor:pointer}
+.save:hover{filter:brightness(1.12)}
+
+.links,.projects{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.links li{border-bottom:1px solid var(--line)}
+.links a{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:16px 4px;min-height:56px;text-decoration:none}
+.links a:hover .label{text-decoration:underline;text-underline-offset:4px}
+.label{font-weight:700}
+.handle{color:var(--muted);font-size:.875rem;overflow-wrap:anywhere;text-align:right}
+
+h2{font:700 1.125rem/1.3 var(--serif);margin:44px 0 12px}
+.projects li{position:relative;padding:20px 4px;border-bottom:1px solid var(--line)}
+.projects h3{font:700 1.0625rem/1.4 var(--serif);margin:0}
+.projects h3 a{text-decoration:none}
+.projects h3 a::after{content:"";position:absolute;inset:0}
+.projects li:hover h3 a{text-decoration:underline;text-underline-offset:4px}
+.projects p{margin:4px 0 10px;color:var(--muted);font-size:.9375rem}
+.tags{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;margin:0;padding:0;
+  font-size:.8125rem;font-weight:500;color:var(--accent)}
+footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-set="en" aria-pressed="true">EN</button>
+    <button type="button" data-set="ja" aria-pressed="false" lang="ja">日本語</button>
+  </div>
+
+  <!-- ===== 1) KİMLİK KARTI: adını, katakana okunuşunu ve unvanını burada değiştir ===== -->
+  <header class="meishi">
+    <div class="who">
+      <div>
+        <h1 id="name">Cagri Karpuz</h1>
+        <p class="role" id="role">
+          <span data-lang="en" lang="en">Backend Developer</span>
+          <span data-lang="ja" lang="ja">バックエンドエンジニア</span>
+        </p>
+      </div>
+      <p class="tagline">
+        <span data-lang="en" lang="en">Mechatronics engineer working as a backend developer in Japan. PHP, AWS.</span>
+        <span data-lang="ja" lang="ja">メカトロニクス工学出身のバックエンドエンジニア。PHPとAWSを使っています。</span>
+      </p>
+    </div>
+    <p class="kana" lang="ja">ナマエ</p>
+  </header>
+
+  <button class="save" id="save" type="button">
+    <span data-lang="en" lang="en">Save contact</span>
+    <span data-lang="ja" lang="ja">連絡先を保存</span>
+  </button>
+
+  <!-- ===== 2) LİNKLER: YOUR-USERNAME, YOUR-ID ve e-posta adresini kendininkilerle değiştir ===== -->
+  <ul class="links">
+    <li><a data-link="github" href="https://github.com/Kharpoose" target="_blank" rel="noopener">
+      <span class="label">GitHub</span><span class="handle">github.com/Kharpoose</span></a></li>
+    <li><a data-link="linkedin" href="https://www.linkedin.com/in/YOUR-ID" target="_blank" rel="noopener">
+      <span class="label">LinkedIn</span><span class="handle">linkedin.com/in/YOUR-ID</span></a></li>
+    <li><a data-link="email" href="cagrikrpz@gmail.com">
+      <span class="label"><span data-lang="en" lang="en">Email</span><span data-lang="ja" lang="ja">メール</span></span>
+      <span class="handle">cagrikrpz@gmail.com</span></a></li>
+  </ul>
+
+  <!-- ===== 3) PROJELER =====
+       YENİ PROJE EKLEMEK İÇİN:
+       1. Aşağıdaki <li> ... </li> bloklarından birini komple kopyala.
+       2. Listenin başına (en yeni en üstte olsun) ya da sonuna yapıştır.
+       3. Üç şeyi değiştir: href (GitHub repo linki), başlık, açıklama. İstersen etiketleri de (<li>Tech A</li>).
+       Dosyayı kaydedip GitHub'a yüklediğinde site 1-2 dakika içinde güncellenir. -->
+  <h2>
+    <span data-lang="en" lang="en">Projects</span>
+    <span data-lang="ja" lang="ja">プロジェクト</span>
+  </h2>
+  <ul class="projects">
+    <li>
+      <h3><a href="https://github.com/Kharpoose/AWS-Simple-Data-Pipeline" target="_blank" rel="noopener">AWS Serverless Data Pipeline</a></h3>
+      <p>A serverless pipeline on AWS for IoT sensor data. Lambda validates and transforms incoming files from S3, stores the results in DynamoDB, and Athena makes them queryable with SQL.</p>
+      <ul class="tags"><li>S3</li><li>Athena</li><li>Lambda</li><li>DynamoDB</li></ul>
+    </li>
+    <li>
+      <h3><a href="https://github.com/Kharpoose/aws-serverless-url-shortener" target="_blank" rel="noopener">AWS Serverless URL Shortener</a></h3>
+      <p>A serverless URL shortener with a REST API. API Gateway exposes the endpoints, Lambda generates the short codes, and DynamoDB stores the mappings.</p>
+      <ul class="tags"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li></ul>
+    </li>
+    <li>
+      <h3><a href="https://github.com/Kharpoose/Japanese-Learning-App" target="_blank" rel="noopener">Japanese Learning App</a></h3>
+      <p>A Japanese learning app built with Flutter, started during university as a personal project. There’s a section that evaluates the user's pronunciation and gives them a score.</p>
+      <ul class="tags"><li>Flutter</li><li>Dart</li><li>Mobile</li></ul>
+    </li>
+  </ul>
+
+  <footer>© Çağrı Karpuz</footer>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll("[data-set]");
+
+  function setLang(l) {
+    root.lang = l;
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === l)); });
+    try { localStorage.setItem("lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "").toLowerCase().indexOf("ja") === 0 ? "ja" : "en"));
+  buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); }); });
+
+  // "Save contact": sayfadaki bilgilerden .vcf (rehber kartı) üretir, ayrıca düzenlemen gerekmez.
+  document.getElementById("save").addEventListener("click", function () {
+    var q = function (s) { return document.querySelector(s); };
+    var name = q("#name").textContent.trim();
+    var role = q('#role [data-lang="en"]').textContent.trim();
+    var email = q('[data-link="email"]').getAttribute("href").replace("mailto:", "");
+    var vcf = [
+      "BEGIN:VCARD", "VERSION:3.0",
+      "FN:" + name, "N:;" + name + ";;;",
+      "TITLE:" + role, "EMAIL:" + email,
+      "URL:" + q('[data-link="github"]').href,
+      "URL:" + q('[data-link="linkedin"]').href,
+      "END:VCARD"
+    ].join("\r\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([vcf], { type: "text/vcard" }));
+    a.download = name.replace(/\s+/g, "-").toLowerCase() + ".vcf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+})();
+</script>
+</body>
+</html>
