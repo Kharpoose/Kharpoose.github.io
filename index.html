@@ -118,7 +118,7 @@ body:has(.cert-panel[open]){overflow:hidden}
     <button type="button" data-set="ja" aria-pressed="false" lang="ja">日本語</button>
   </div>
 
-  <!-- ===== 1) KİMLİK KARTI: adını, katakana okunuşunu ve unvanını burada değiştir ===== -->
+  <!-- =====  KİMLİK KARTI ===== -->
   <header class="meishi">
     <div class="who">
       <div>
@@ -158,10 +158,7 @@ body:has(.cert-panel[open]){overflow:hidden}
 
   <!-- ===== 3) PROJELER =====
        YENİ PROJE EKLEMEK İÇİN:
-       1. Aşağıdaki <li> ... </li> bloklarından birini komple kopyala.
-       2. Listenin başına (en yeni en üstte olsun) ya da sonuna yapıştır.
-       3. Üç şeyi değiştir: href (GitHub repo linki), başlık, açıklama. İstersen etiketleri de (<li>Tech A</li>).
-       Dosyayı kaydedip GitHub'a yüklediğinde site 1-2 dakika içinde güncellenir. -->
+       1. Aşağıdaki <li> ... </li> bloklarından birini komple kopyala -->
    <h2>
     <span data-lang="en" lang="en">Projects</span>
     <span data-lang="ja" lang="ja">プロジェクト</span>
@@ -271,7 +268,7 @@ body:has(.cert-panel[open]){overflow:hidden}
   setLang(saved || ((navigator.language || "").toLowerCase().indexOf("ja") === 0 ? "ja" : "en"));
   buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); }); });
 
-  // "Save contact": sayfadaki bilgilerden .vcf (rehber kartı) üretir, ayrıca düzenlemen gerekmez.
+  // "Save contact": sayfadaki bilgilerden .vcf (rehber kartı) üretir
   document.getElementById("save").addEventListener("click", function () {
     var q = function (s) { return document.querySelector(s); };
     var name = q("#name").textContent.trim();
