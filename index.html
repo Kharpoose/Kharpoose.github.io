@@ -64,6 +64,50 @@ h2{font:700 1.125rem/1.3 var(--serif);margin:44px 0 12px}
 .tags{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;margin:0;padding:0;
   font-size:.8125rem;font-weight:500;color:var(--accent)}
 footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
+
+/* ===== SERTIFIKALAR ===== */
+.links button{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;
+  padding:16px 4px;min-height:56px;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.links button:hover .label{text-decoration:underline;text-underline-offset:4px}
+
+/* Sagdan kayarak acilan panel (telefonda tam ekran, bilgisayarda yan panel) */
+.cert-panel{--glow:rgba(38,74,115,.55);width:min(100%,640px);max-width:none;height:100dvh;max-height:none;
+  margin:0 0 0 auto;padding:0;border:0;overflow:hidden;background:var(--paper);color:var(--ink)}
+@media (prefers-color-scheme:dark){.cert-panel{--glow:rgba(141,179,222,.7)}}
+.cert-panel::backdrop{background:rgba(14,21,30,.55)}
+.cert-panel[open]{animation:cert-in .28s ease-out}
+@keyframes cert-in{from{transform:translateX(100%)}to{transform:none}}
+body:has(.cert-panel[open]){overflow:hidden}
+.cert-body{height:100%;overflow-y:auto;padding:max(20px,env(safe-area-inset-top)) 20px max(40px,env(safe-area-inset-bottom))}
+.cert-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cert-top h2{margin:0}
+.cert-close{font:500 .8125rem/1 var(--sans);color:var(--muted);background:none;border:1px solid var(--line);
+  border-radius:999px;padding:9px 14px;cursor:pointer}
+
+.cert-group h3{font:700 1.25rem/1.3 var(--serif);margin:36px 0 4px}
+.cert-note{margin:0;font-size:.875rem;color:var(--muted)}
+.cert-note a{color:var(--accent)}
+.cert-group h4{font:500 .8125rem/1 var(--sans);letter-spacing:.06em;color:var(--muted);
+  margin:28px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+
+/* Rozet izgarasi + uzerine gelince parlama */
+.badges{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:24px 14px}
+.badge{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  text-decoration:none;font-size:.8125rem;line-height:1.45}
+.badge img{width:112px;height:112px;object-fit:contain;transition:transform .25s ease,filter .25s ease}
+.badge img.missing{background:var(--line);border-radius:12px}
+.badge:active img,.badge:focus-visible img{filter:drop-shadow(0 0 14px var(--glow));transform:translateY(-4px) scale(1.04)}
+@media (hover:hover){.badge:hover img{filter:drop-shadow(0 0 14px var(--glow));transform:translateY(-4px) scale(1.04)}}
+@media (prefers-reduced-motion:reduce){
+  .cert-panel[open]{animation:none}
+  .badge img{transition:none}
+  .badge:hover img,.badge:active img,.badge:focus-visible img{transform:none}
+}
+
+/* Rozeti olmayan sertifikalar icin (JLPT, TOEIC gibi) duz liste */
+.cert-list{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.cert-list li{display:flex;justify-content:space-between;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.cert-list li span:last-child{color:var(--muted);text-align:right}
 </style>
 </head>
 <body>
@@ -101,11 +145,15 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
   <ul class="links">
     <li><a data-link="github" href="https://github.com/Kharpoose" target="_blank" rel="noopener">
       <span class="label">GitHub</span><span class="handle">github.com/Kharpoose</span></a></li>
-    <li><a data-link="linkedin" href="https://www.linkedin.com/in/YOUR-ID" target="_blank" rel="noopener">
-      <span class="label">LinkedIn</span><span class="handle">linkedin.com/in/YOUR-ID</span></a></li>
-    <li><a data-link="email" href="cagrikrpz@gmail.com">
+    <li><a data-link="linkedin" href="https://www.linkedin.com/in/çağrı-k-456327202/" target="_blank" rel="noopener">
+      <span class="label">LinkedIn</span><span class="handle">linkedin.com/in/çağrı-k-456327202</span></a></li>
+    <li><a data-link="email" href="mailto:cagrikrpz@gmail.com">
       <span class="label"><span data-lang="en" lang="en">Email</span><span data-lang="ja" lang="ja">メール</span></span>
       <span class="handle">cagrikrpz@gmail.com</span></a></li>
+    <li><button type="button" id="open-certs">
+      <span class="label"><span data-lang="en" lang="en">Certifications</span><span data-lang="ja" lang="ja">資格・認定</span></span>
+      <span class="handle">AWS</span>
+    </button></li>
   </ul>
 
   <!-- ===== 3) PROJELER =====
@@ -147,6 +195,66 @@ footer{margin-top:48px;color:var(--muted);font-size:.8125rem}
 
   <footer>© Çağrı Karpuz</footer>
 </main>
+<dialog class="cert-panel" id="certs" aria-labelledby="certs-title">
+  <div class="cert-body">
+
+    <div class="cert-top">
+      <h2 id="certs-title"><span data-lang="en" lang="en">Certifications</span><span data-lang="ja" lang="ja">資格・認定</span></h2>
+      <button type="button" class="cert-close" data-close><span data-lang="en" lang="en">Close</span><span data-lang="ja" lang="ja">閉じる</span></button>
+    </div>
+
+    <!-- ===== AWS ===== -->
+    <section class="cert-group">
+      <h3>AWS</h3>
+      <p class="cert-note"><a href="https://www.credly.com/users/cagri-karpuz" target="_blank" rel="noopener"><span data-lang="en" lang="en">Verify all on Credly</span><span data-lang="ja" lang="ja">Credlyですべて確認</span></a></p>
+
+      <h4>Professional</h4>
+      <ul class="badges">
+        <li><a class="badge" href="https://www.credly.com/badges/fd88e18b-bb4d-4cf8-b294-9f456fed6235/public_url" target="_blank" rel="noopener"><img src="badges/solutions-architect-professional.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Solutions Architect – Professional</span></a></li>
+        <li><a class="badge" href="https://www.credly.com/badges/4b4f3976-ec10-4f04-a3b3-4b1663929355/public_url" target="_blank" rel="noopener"><img src="badges/devops-engineer-professional.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified DevOps Engineer – Professional</span></a></li>
+      </ul>
+
+      <h4>Specialty</h4>
+      <ul class="badges">
+        <li><a class="badge" href="https://www.credly.com/badges/99062cb9-ec30-4459-8946-c83430f87d58/public_url" target="_blank" rel="noopener"><img src="badges/advanced-networking-specialty.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Advanced Networking – Specialty</span></a></li>
+        <li><a class="badge" href="https://www.credly.com/badges/c0900b77-f22c-41ed-ac6c-84a9514d80f8/public_url" target="_blank" rel="noopener"><img src="badges/machine-learning-specialty.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Machine Learning – Specialty</span></a></li>
+      </ul>
+
+      <h4>Associate</h4>
+      <ul class="badges">
+        <li><a class="badge" href="https://www.credly.com/badges/0057d334-9ecc-41d5-8461-b017324b88c3/public_url" target="_blank" rel="noopener"><img src="badges/solutions-architect-associate.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Solutions Architect – Associate</span></a></li>
+        <li><a class="badge" href="https://www.credly.com/badges/9ac18536-e092-47cb-a005-71aa58d2480a/public_url" target="_blank" rel="noopener"><img src="badges/data-engineer-associate.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Data Engineer – Associate</span></a></li>
+        <li><a class="badge" href="https://www.credly.com/badges/ac75adb8-8243-4bf9-863c-c15e686f2e00/public_url" target="_blank" rel="noopener"><img src="badges/machine-learning-engineer-associate.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Machine Learning Engineer – Associate</span></a></li>
+      </ul>
+
+      <h4>Foundational</h4>
+      <ul class="badges">
+        <li><a class="badge" href="https://www.credly.com/badges/cdb97e95-5c2c-4ae1-8936-7a296eda3674/public_url" target="_blank" rel="noopener"><img src="badges/cloud-practitioner.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified Cloud Practitioner</span></a></li>
+        <li><a class="badge" href="https://www.credly.com/badges/ed3f9375-289a-4a75-bf9e-2c6bb3814b6a/public_url" target="_blank" rel="noopener"><img src="badges/ai-practitioner.png" alt="" width="112" height="112" loading="lazy" onerror="this.classList.add('missing')"><span>AWS Certified AI Practitioner</span></a></li>
+      </ul>
+    </section>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById("certs");
+  var openBtn = document.getElementById("open-certs");
+
+  openBtn.addEventListener("click", function () {
+    dlg.showModal();
+    history.pushState({ certs: 1 }, "", "#certifications"); // telefonun geri tusu paneli kapatsin
+  });
+  dlg.querySelectorAll("[data-close]").forEach(function (b) {
+    b.addEventListener("click", function () { dlg.close(); });
+  });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener("close", function () {
+    if (location.hash === "#certifications") history.back();
+  });
+  window.addEventListener("popstate", function () { if (dlg.open) dlg.close(); });
+})();
+</script>
 
 <script>
 (function () {
